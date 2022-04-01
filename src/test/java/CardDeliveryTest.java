@@ -21,13 +21,12 @@ public class CardDeliveryTest {
         open("http://localhost:9999/");
         faker = new Faker(new Locale("ru"));
         $x("//span[@data-test-id='date']//input[@type='tel']").doubleClick().sendKeys(Keys.chord(Keys.BACK_SPACE));
-
     }
 
     String dateByClient = DataGenerator.date(3);
 
     @Test
-    void bildWorkTest() {
+    void buildWorkTest() {
         $x("//span[@data-test-id='city']//input[@type='text']").val(DataGenerator.city());
         $x("//span[@data-test-id='date']//input[@type='tel']").val(dateByClient);
         $x("//span[@data-test-id='name']//input[@type='text']").val(DataGenerator.surNameAndFirstName());
@@ -75,5 +74,5 @@ public class CardDeliveryTest {
         $x("//label[@data-test-id='agreement']").click();
         $x("//span[@class='button__text']").click();
         $x("//span[@data-test-id='name']").shouldHave(Condition.text("Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы."));
-}
+    }
 }
