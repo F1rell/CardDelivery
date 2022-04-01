@@ -8,7 +8,6 @@ import org.openqa.selenium.Keys;
 import java.time.Duration;
 import java.util.Locale;
 
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.open;
 
@@ -36,11 +35,11 @@ public class CardDeliveryTest {
         $x("//div[@class='notification__title']").shouldHave(Condition.text("Успешно!"), Duration.ofSeconds(15));
         $x("//div[@class='notification__content']").shouldHave(Condition.text("Встреча успешно запланирована на " + dateByClient), Duration.ofSeconds(15));
         $x("//span[@class='button__text']").click();
-        $x("//*[contains(text(),'У вас уже запланирована встреча на другую дату. Перепланировать?')]").should(visible, Duration.ofSeconds(15));
+        $x("//div[@data-test-id='replan-notification']//div[@class='notification__content']").shouldHave(Condition.text("У вас уже запланирована встреча на другую дату. Перепланировать?"), Duration.ofSeconds(15));
         $x("//span[@data-test-id='date']//input[@type='tel']").doubleClick().sendKeys(Keys.chord(Keys.BACK_SPACE));
         String newDateByClient = DataGenerator.date(4);
         $x("//span[@data-test-id='date']//input[@type='tel']").val(newDateByClient);
-        $x("//*[contains(text(),'У вас уже запланирована встреча на другую дату. Перепланировать?')]//button").click();
+        $x("//div[@data-test-id='replan-notification']//button").click();
         $x("//div[@class='notification__title']").shouldHave(Condition.text("Успешно"), Duration.ofSeconds(15));
         $x("//div[@class='notification__content']").shouldHave(Condition.text("Встреча успешно запланирована на " + newDateByClient), Duration.ofSeconds(15));
     }
@@ -56,11 +55,11 @@ public class CardDeliveryTest {
         $x("//div[@class='notification__title']").shouldHave(Condition.text("Успешно!"), Duration.ofSeconds(15));
         $x("//div[@class='notification__content']").shouldHave(Condition.text("Встреча успешно запланирована на " + dateByClient), Duration.ofSeconds(15));
         $x("//span[@class='button__text']").click();
-        $x("//*[contains(text(),'У вас уже запланирована встреча на другую дату. Перепланировать?')]").should(visible, Duration.ofSeconds(15));
+        $x("//div[@data-test-id='replan-notification']//div[@class='notification__content']").shouldHave(Condition.text("У вас уже запланирована встреча на другую дату. Перепланировать?"), Duration.ofSeconds(15));
         $x("//span[@data-test-id='date']//input[@type='tel']").doubleClick().sendKeys(Keys.chord(Keys.BACK_SPACE));
         String newDateByClient = DataGenerator.date(4);
         $x("//span[@data-test-id='date']//input[@type='tel']").val(newDateByClient);
-        $x("//*[contains(text(),'У вас уже запланирована встреча на другую дату. Перепланировать?')]//button").click();
+        $x("//div[@data-test-id='replan-notification']//button").click();
         $x("//div[@class='notification__title']").shouldHave(Condition.text("Успешно"), Duration.ofSeconds(15));
         $x("//div[@class='notification__content']").shouldHave(Condition.text("Встреча успешно запланирована на " + newDateByClient), Duration.ofSeconds(15));
     }
